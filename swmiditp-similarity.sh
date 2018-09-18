@@ -1,4 +1,4 @@
-# swmiditp-similarity.sh
+#!/bin/bash
 
 if [ $# -lt 2 ]
 	  then
@@ -14,3 +14,6 @@ python midi_similarity.py $1 > match.nt
 
 # curl send the .nt file to MIDI LOD Cloud
 curl -s  -o /dev/null -X POST http://grlc.io/api/midi-ld/queries/insert_pattern -d"g=<$2>" -d"data=$(cat match.nt)"
+
+# id send frbr links
+curl -s  -o /dev/null -X POST http://grlc.io/api/midi-ld/queries/insert_pattern -d"g=<$2>" -d"data=$(cat links.nt)"
